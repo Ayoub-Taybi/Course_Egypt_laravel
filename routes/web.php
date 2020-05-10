@@ -20,11 +20,11 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 
+Route::get('login/{provider}', 'Auth\SocialeAccountController@redirect');
+Route::get('login/callback/{provider}', 'Auth\SocialeAccountController@callback');
+
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
-
-
-
 
     Route::group(['namespace'=>'Front','prefix'=>'Front'],function(){
 
