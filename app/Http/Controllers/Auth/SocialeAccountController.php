@@ -58,17 +58,23 @@ class SocialeAccountController extends Controller
               $user->accounts()->create([
                  'provider_id'     => $getInfo->id,
                  'provider_name'    => $provider,
-                 'user_id' => $user->id,
               ]);
 
             return $user;
 
           }else{
 
+              if(!$user->email_verified_at){
+
+                 User::where('id',$user->id)->update([
+                  'email_verified_at'=>now(),
+               ]);
+
+              }
+
               $user->accounts()->create([
                   'provider_id'     => $getInfo->id,
                   'provider_name'    => $provider,
-                  'user_id' => $user->id,
               ]);
 
         return $user;

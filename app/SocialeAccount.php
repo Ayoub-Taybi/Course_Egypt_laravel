@@ -8,7 +8,7 @@ use App\User;
 class SocialeAccount extends Model
 {
     protected $fillable = [
-        'provider_id', 'provider_name', 'user_id'
+        'provider_id', 'provider_name'
     ];
 
 
