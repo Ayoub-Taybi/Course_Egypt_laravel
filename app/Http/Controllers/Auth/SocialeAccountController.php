@@ -66,7 +66,7 @@ class SocialeAccountController extends Controller
 
               if(!$user->email_verified_at){
 
-                 User::where('id',$user->id)->update([
+                 $user->update([
                   'email_verified_at'=>now(),
                ]);
 
