@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Validator,Redirect,Response,File;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
-use App\SocialeAccount;
+use App\Models\SocialeAccount;
 use Auth;
 
 
