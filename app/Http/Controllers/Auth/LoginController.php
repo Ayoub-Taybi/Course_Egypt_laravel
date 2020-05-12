@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function username()
     {
            
-        $value = request()-> input('identify');
+         $value = request()-> input('identify');
 
         $feild = filter_var($value,FILTER_VALIDATE_EMAIL)? 'email':'mobile';
 

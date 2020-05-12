@@ -42,6 +42,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
                 
                 Route::get('create','OfferController@create')->name('offers.create');
                 Route::post('store','OfferController@store')->name('offers.store');
+                Route::get('all','OfferController@index')->name('offers.index');
         
             });
             

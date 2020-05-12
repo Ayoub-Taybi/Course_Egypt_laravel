@@ -74,7 +74,7 @@
           <ul class="navbar-nav mr-auto">
            
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-            <li class="nav-item ">
+            <li class="nav-item @if(App::getLocale()==$localeCode) active @endif">
                 <a class="nav-link"  rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                     {{ $properties['native'] }}
                 </a>
@@ -83,14 +83,12 @@
            
           </ul>
 
-         
-        
         </div>
       </nav>
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title m-b-md">
-            Add your offer
+            {{__('messages.Add your offer')}}
         </div>
 
      @if(Session::has('success'))
@@ -104,29 +102,49 @@
             @csrf
 
             <div class="form-group">
-                <label >Offer Name</label>
-               <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Enter namme">
-                @error('name')
+                <label >{{__('messages.Offer Name ar')}}</label>
+               <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ old('name_ar') }}" placeholder="{{__('messages.Enter name')}} ar">
+                @error('name_ar')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
+
+            
             <div class="form-group">
-                <label >Offer Price</label>
-                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" placeholder="Price">
+                <label >{{__('messages.Offer Name en')}}</label>
+               <input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" placeholder="{{__('messages.Enter name')}} en">
+                @error('name_en')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label >{{__('messages.Offer Price')}}</label>
+                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" placeholder="{{__('messages.Price')}}">
                 @error('price')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label >Offer details</label>
-                <input type="text" class="form-control @error('details') is-invalid @enderror" name="details" value=" {{old('details')}} " placeholder="details">
-                @error('details')
+                <label >{{__('messages.Offer details ar')}}</label>
+                <input type="text" class="form-control @error('details_ar') is-invalid @enderror" name="details_ar" value=" {{old('details_ar')}} " placeholder="details ar">
+                @error('details_ar')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Save Offer</button>
+            <div class="form-group">
+                <label >{{__('messages.Offer details en')}}</label>
+                <input type="text" class="form-control @error('details_en') is-invalid @enderror" name="details_en" value=" {{old('details_en')}} " placeholder="details en">
+                @error('details_en')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+           
+
+            <button type="submit" class="btn btn-primary">{{__('messages.Save Offer')}}</button>
         </form>
 
 
