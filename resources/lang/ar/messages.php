@@ -17,6 +17,6 @@ return [
 
     "hello guys" => 'اهلا بكم ',
     "welcome" => 'اهلا  ',
-    "offer" => 'أسم العرض مطلوب',
+    "offer name required" => 'أسم العرض مطلوب',
     "offer name must be unique" => 'أسم العرض يجب الا يتكرر',
 ];
