@@ -37,3 +37,19 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 
 
+
+
+        Route::group(['prefix' => 'offers'], function () {
+            
+            Route::get('create','OfferController@create')->name('offers.create');
+            Route::post('store','OfferController@store')->name('offers.store');
+    
+        });
+
+
+  
+
+
+
+
+

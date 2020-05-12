@@ -38,7 +38,7 @@ class SocialeAccountController extends Controller
     }
 
 
-    function createUser($getInfo,$provider){
+  private function createUser($getInfo,$provider){
  
         $account = SocialeAccount::where('provider_id', $getInfo->id)->first();
  
