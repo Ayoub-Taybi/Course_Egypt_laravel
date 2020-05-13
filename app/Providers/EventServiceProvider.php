@@ -7,6 +7,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Events\VideoViewer;
+use App\Listeners\IncreaseCounter;
+
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -18,7 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-       
+        VideoViewer::class => [
+            IncreaseCounter::class,
+        ],  
     ];
 
     /**

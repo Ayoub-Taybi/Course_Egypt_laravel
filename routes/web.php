@@ -49,6 +49,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
                 Route::put('update/{offer_id}', 'OfferController@UpdateOffer')->name('offers.update');
         
             });
+
+            Route::get('youtube', 'VideoController@getVideo');
+
             
         });
 

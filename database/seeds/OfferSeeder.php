@@ -12,6 +12,10 @@ class OfferSeeder extends Seeder
      */
     public function run()
     {
-        factory(Offer::class,5)->create();
+
+        $numberOffers =(int)$this->command->ask("How maney of Offers you want to generate",30);
+
+        factory(Offer::class,$numberOffers)->create();
+
     }
 }

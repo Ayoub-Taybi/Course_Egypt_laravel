@@ -168,4 +168,11 @@ class OfferController extends Controller
     //         'details_en' => 'required',
     //     ];
     // }
+
+
+  
+
+
+
+
 }
