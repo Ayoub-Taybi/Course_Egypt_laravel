@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class OfferRequest extends FormRequest
 {
@@ -23,13 +25,17 @@ class OfferRequest extends FormRequest
      */
     public function rules()
     {
+
+       
         return [
-            'name_ar' => 'required|max:100|unique:offers',
+            'name_ar' => ["required","max:100",Rule::unique('offers', 'name_ar')->ignore($this->offer_id)],
             'price' => 'required|numeric',
-            'details_ar' => 'required',
-            'name_en' => 'required|max:100|unique:offers',
+            'details_ar' => 'required', 
+            'name_en' => "required|max:100|unique:offers,name_en,$this->offer_id",
             'details_en' => 'required',
+            'photo'=>'required|image|mimes:jpeg,png',
         ];
+
     }
 
     public function messages(){

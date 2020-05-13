@@ -33,5 +33,10 @@ return [
     "Offer Name ar"   => 'Arabic Offer Name',
     "Offer Name en"   => 'English Offer Name',
 
+    "Save Offer"  => 'Save',
+    "operation" => "operation",
+    "update" => "Update",
+    "Update your offer"  => "Update your offer  "
+
     
 ];

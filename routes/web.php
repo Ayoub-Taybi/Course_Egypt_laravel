@@ -40,9 +40,13 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
             Route::group(['prefix' => 'offers'], function () {
                 
-                Route::get('create','OfferController@create')->name('offers.create');
+                Route::get('create','OfferController@create');
                 Route::post('store','OfferController@store')->name('offers.store');
+
                 Route::get('all','OfferController@index')->name('offers.index');
+
+                Route::get('edit/{offer_id}', 'OfferController@editOffer');
+                Route::put('update/{offer_id}', 'OfferController@UpdateOffer')->name('offers.update');
         
             });
             

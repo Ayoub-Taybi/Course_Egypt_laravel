@@ -35,6 +35,11 @@ return [
     "Offer details ar" => 'تفاصيل العرض بالعربي',
     "Offer details en" => 'تفاصيل العرض بالانجليزي',
 
+    "Save Offer"  => 'حفظ',
+    "operation" => 'العمليات',
+    "update" => 'تحديث',
+    "Update your offer"  => "تعديل العرض "
+
 
 
 ];
