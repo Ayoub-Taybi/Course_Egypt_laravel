@@ -36,7 +36,11 @@ return [
     "Save Offer"  => 'Save',
     "operation" => "operation",
     "update" => "Update",
-    "Update your offer"  => "Update your offer  "
+    "Update your offer"  => "Update your offer ",
+
+    "delete" => "delete",
+    "offer not exist" => "offer not exist",
+    "offer deleted successfully" => "offer deleted successfully",
 
     
 ];

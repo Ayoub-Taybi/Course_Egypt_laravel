@@ -83,7 +83,7 @@ class SocialeAccountController extends Controller
    
     }else{
 
-        $user = User::where('id', $account->user_id)->first();
+        $user = User::find($account->user_id);
          return $user;
 
      }

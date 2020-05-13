@@ -29,7 +29,7 @@ class OfferController extends Controller
     public function index()
     {
        
-        $offers = Offer::select('id', 'name_'.LaravelLocalization::getCurrentLocale().' as name','price','details_'.LaravelLocalization::getCurrentLocale().' as details')->get(); // return collection
+        $offers = Offer::select('id', 'name_'.LaravelLocalization::getCurrentLocale().' as name','price','details_'.LaravelLocalization::getCurrentLocale().' as details','photo')->get(); // return collection
         return view('offers.all', compact('offers'));
   
     }
@@ -143,6 +143,32 @@ class OfferController extends Controller
         ]);*/
 
     }
+
+    
+    public function delete($offer_id)
+    {
+        //check if offer id exists
+
+        //  $offer = Offer::where('id',$offer_id)->delete();
+
+        $offer = Offer::find($offer_id);   // Offer::where('id','$offer_id') -> first();
+
+        if (!$offer)
+            return redirect()->back()->with(['error' => __('messages.offer not exist')]);
+
+        $offer->delete();
+
+
+        // Offer::destroy($offer_id); 
+
+        return redirect()
+            ->route('offers.index')
+            ->with(['success' => __('messages.offer deleted successfully')]);
+
+            
+
+    }
+
 
     // private function getMessages()
     // {
