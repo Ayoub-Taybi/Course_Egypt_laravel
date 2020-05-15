@@ -84,6 +84,7 @@ class AjaxOfferController extends Controller
             ]);
 
 
+            $this->removeImage($offer->photo);
             $offer->delete();
 
         // Offer::destroy($offer_id); 
@@ -93,10 +94,76 @@ class AjaxOfferController extends Controller
             'msg' => 'تم الحذف بنجاح',
             'id' =>  $request -> id
         ]);
+    
+    }
 
-        
-        
+
+
+    public function edit($offer_id)
+    {
+        // Offer::findOrFail($offer_id);
+        $offer = Offer::find($offer_id);
+          // search in given table id only
+
+        if (!$offer)
+            return redirect()->back()->with(['error' => "This offer doesn't exist"]);
+
+        $offer = Offer::select('id', 'name_ar', 'name_en', 'details_ar', 'details_en', 'price')->find($offer_id);
+
+        return view('ajaxoffers.edit', compact('offer'));
 
     }
+
+
+    public function Update(OfferRequest $request)
+    {
+        
+        $offer = Offer::find($request->id);
+
+        if (!$offer)
+        return response()->json([
+            'status' => false,
+            'msg' => 'هذ العرض غير موجود',
+        ]);
+
+       
+
+        $path_photo= $this->saveImage($request->photo,'images/offers');
+
+         if(!$path_photo){
+
+            $offer->update([
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'price' => $request->price,
+                'details_ar' => $request->details_ar,
+                'details_en' => $request->details_en,
+            ]);
+         }else{
+
+            $this->removeImage($offer->photo);
+
+            $offer->update([
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'price' => $request->price,
+                'photo' => $path_photo,
+                'details_ar' => $request->details_ar,
+                'details_en' => $request->details_en,
+            ]);
+
+         }
+        
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'تم  التحديث بنجاح',
+        ]);
+
+     
+
+    }
+
+
 
 }

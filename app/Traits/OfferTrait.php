@@ -12,13 +12,31 @@ Trait OfferTrait {
 
     public function saveImage($photo,$folder){
 
-        $file_extension = $photo ->getClientOriginalExtension();
-       //  $file_name = $request -> photo ->getClientOriginalName();
-        $file_name =Str::random(10).'_'.time().'.'.$file_extension;
-        $photo ->move($folder,$file_name);
+        if($photo){
 
-        return $file_name;
+            $file_extension = $photo ->getClientOriginalExtension();
+            //  $file_name = $request -> photo ->getClientOriginalName();
+             $file_name =Str::random(10).'_'.time().'.'.$file_extension;
+             $photo ->move($folder,$file_name);
+             return $folder.'/'.$file_name;
+        }
+        else{
+
+            return null;
+        }
+
    }
+
+
+   public function removeImage($photo){
+
+    if($photo){
+
+        unlink($photo);
+
+     }
+
+    }
 
 
 }

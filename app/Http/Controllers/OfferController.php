@@ -111,7 +111,7 @@ class OfferController extends Controller
 
     }
 
-    public function UpdateOffer(OfferRequest $request, $offer_id)
+    public function UpdateOffer(OfferRequest $request, $id)
     {
 
         //validtion
@@ -126,7 +126,7 @@ class OfferController extends Controller
 
         // chek if offer exists
 
-        $offer = Offer::find($offer_id);
+        $offer = Offer::find($id);
         if (!$offer)
             return redirect()->back();
 
@@ -156,6 +156,7 @@ class OfferController extends Controller
         if (!$offer)
             return redirect()->back()->with(['error' => __('messages.offer not exist')]);
 
+        $this->removeImage($offer->photo);
         $offer->delete();
 
 

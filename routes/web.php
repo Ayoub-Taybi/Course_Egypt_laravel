@@ -46,7 +46,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
                 Route::get('all','OfferController@index')->name('offers.index');
 
                 Route::get('edit/{offer_id}', 'OfferController@editOffer');
-                Route::put('update/{offer_id}', 'OfferController@UpdateOffer')->name('offers.update');
+                Route::put('update/{id}', 'OfferController@UpdateOffer')->name('offers.update');
         
                 Route::get('delete/{offer_id}', 'OfferController@delete') -> name('offers.delete');
 
@@ -60,13 +60,15 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 
         ###################### Begin Ajax routes #####################
+
 Route::group(['prefix' => 'ajax-offers'],function(){
     Route::get('create','AjaxOfferController@create');
     Route::post('store','AjaxOfferController@store') ->name('ajax.offers.store');
     Route::get('all','AjaxOfferController@index') -> name('ajax.offers.all');
     Route::post('delete','AjaxOfferController@delete')->name('ajax.offers.delete');
-    // Route::get('edit/{offer_id}', 'AjaxOfferController@edit')->name('ajax.offers.edit');
-    // Route::post('update', 'AjaxOfferController@Update')->name('ajax.offers.update');
+    Route::get('edit/{offer_id}', 'AjaxOfferController@edit')->name('ajax.offers.edit');
+    Route::put('update', 'AjaxOfferController@Update')->name('ajax.offers.update');
+    
 });
 ###################### End Ajax routes #####################
 

@@ -7,6 +7,12 @@
 <div class="container">
 
 
+    @if (Session::has('error'))
+        <div id="error_msg" class="alert alert-danger" role="alert">
+          {{Session::get('error')}}
+        </div>
+    @endif
+
     <div id="success_msg" class="alert alert-success" role="alert" style="display:none;">
     </div>
 
@@ -31,26 +37,8 @@
         </thead>
         <tbody>
     
-    
-        @foreach($offers as $offer)
-            <tr class='offerRow{{$offer -> id}}'>
-                <th scope="row">{{$offer -> id}}</th>
-                <td>{{$offer -> name}}</td>
-                <td>{{$offer -> price}}</td>
-                <td>{{$offer -> details}}</td>
-                <td>
-                    <img  style="width: 90px; height: 90px;" src="{{asset('/images/offers/'.$offer->photo)}}">
-                </td>
-                <td>
-
-                    <a href="{{url('offers/edit/'.$offer -> id)}}" class="btn btn-success"> {{__('messages.update')}}</a>
-                    <a href="#" offer_id="{{$offer -> id}}"  class="delete_btn btn btn-danger"> حذف اجاكس     </a>
-                
-                </td>
-    
-            </tr>
-        @endforeach
-    
+        @each('ajaxoffers.rows', $offers, 'offer')
+         
         </tbody>
     </table>
     
@@ -59,9 +47,12 @@
 
 @stop
 
+
+
 @section('scripts')
 
     <script>
+       
         $(document).on('click', '.delete_btn', function (e) {
             e.preventDefault();
              
@@ -97,3 +88,7 @@
 
 
 @endsection
+
+@push('scripts')
+       <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+@endpush

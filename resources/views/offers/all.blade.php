@@ -47,7 +47,7 @@
             <td>{{$offer -> price}}</td>
             <td>{{$offer -> details}}</td>
             <td>
-                <img  style="width: 90px; height: 90px;" src="{{asset('/images/offers/'.$offer->photo)}}">
+                <img  style="width: 90px; height: 90px;" src="{{asset($offer->photo)}}">
             </td>
 
             <td>
