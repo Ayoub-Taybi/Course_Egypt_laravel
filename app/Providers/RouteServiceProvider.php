@@ -23,6 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+    public const ADMIN = '/admin';
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -83,7 +85,8 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapAdminRoutes()
     {
-        Route::namespace($this->namespace)
+        Route::middleware('admin')
+             ->namespace($this->namespace)
              ->group(base_path('routes/admin.php'));
     }
 

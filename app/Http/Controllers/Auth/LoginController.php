@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -42,7 +45,7 @@ class LoginController extends Controller
     public function username()
     {
            
-         $value = request()-> input('identify');
+        $value = request()-> input('identify');
 
         $feild = filter_var($value,FILTER_VALIDATE_EMAIL)? 'email':'mobile';
 
@@ -51,5 +54,31 @@ class LoginController extends Controller
          return $feild;
 
     }
+
+
+    protected function authenticated(Request $request, $user)
+    {
+        $user->update(['active'=>true]);
+
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function logout(Request $request)
+    {
+
+         $user = Auth::user();
+
+        $user->update(['active'=>false]);
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+ 
 
 }

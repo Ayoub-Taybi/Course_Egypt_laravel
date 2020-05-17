@@ -34,12 +34,14 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 
 
+###################### BEGIN route of Offer with multi language ar en using package mcamara  ###############################
+
 
     Route::group(
-        ['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'] ], function(){ 
+        ['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'] ], function(){
 
             Route::group(['prefix' => 'offers'], function () {
-                
+
                 Route::get('create','OfferController@create');
                 Route::post('store','OfferController@store')->name('offers.store');
 
@@ -47,7 +49,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
                 Route::get('edit/{offer_id}', 'OfferController@editOffer');
                 Route::put('update/{id}', 'OfferController@UpdateOffer')->name('offers.update');
-        
+
                 Route::get('delete/{offer_id}', 'OfferController@delete') -> name('offers.delete');
 
 
@@ -55,11 +57,18 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
             Route::get('youtube', 'VideoController@getVideo');
 
-            
+
         });
 
 
-        ###################### Begin Ajax routes #####################
+###################### END route of Offer with multi language ar en using package mcamara  ###############################
+
+
+
+
+
+
+############################## BEGIN routes Offer with ajax #####################
 
 Route::group(['prefix' => 'ajax-offers'],function(){
     Route::get('create','AjaxOfferController@create');
@@ -68,12 +77,51 @@ Route::group(['prefix' => 'ajax-offers'],function(){
     Route::post('delete','AjaxOfferController@delete')->name('ajax.offers.delete');
     Route::get('edit/{offer_id}', 'AjaxOfferController@edit')->name('ajax.offers.edit');
     Route::put('update', 'AjaxOfferController@Update')->name('ajax.offers.update');
-    
+
 });
-###################### End Ajax routes #####################
+
+###################### End Begin routes Offer with ajax ###############################
 
 
-       
+
+###################### BEGIN Authentication && Gaurdes ###############################
+
+Route::group(['namespace'=>'Auth','middleware'=>['CheckAge','auth']],function(){
+
+    Route::get('adults','CustomAuthController@Adult')->name('adult');
+
+});
+
+
+
+Route::get('site', 'Auth\CustomAuthController@site')->middleware('auth')-> name('site');
+
+
+
+Route::group(['namespace'=>'Auth','prefix'=>'admin'],function(){
+
+    Route::get('', 'CustomAuthController@admin')->middleware('auth:admin')-> name('admin');
+    Route::get('login', 'AdminController@adminLogin')->name('admin.login');
+    Route::post('login', 'AdminController@checkAdminLogin')->name('save.admin.login');
+    Route::post('logout', 'AdminController@logout')->name('admin.logout');
+
+});
+
+
+
+
+Route::get('/notadults', function () {
+    return 'You are not adults';
+})->name('not.adults');
+
+
+
+###################### END Authentication && Gaurdes ###############################
+
+
+
+
+
 
 
 
