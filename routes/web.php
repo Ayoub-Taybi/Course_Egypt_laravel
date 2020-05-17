@@ -55,10 +55,20 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
             });
 
-            Route::get('youtube', 'VideoController@getVideo');
 
 
         });
+
+
+###################### BEGIN of route youtube using event and listener  ###############################
+
+
+     Route::get('youtube', 'VideoController@getVideo')->middleware('auth');
+
+
+###################### END  of route youtube using event and listener  ###############################
+
+
 
 
 ###################### END route of Offer with multi language ar en using package mcamara  ###############################
