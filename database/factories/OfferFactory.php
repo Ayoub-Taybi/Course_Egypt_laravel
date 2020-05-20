@@ -4,10 +4,12 @@
 
 use App\Models\Offer;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+
+
 
 $factory->define(Offer::class, function (Faker $faker) {
     
-
 
     $data_en = [
                 'name_en' => $faker->name,
@@ -15,9 +17,11 @@ $factory->define(Offer::class, function (Faker $faker) {
                 'details_en' => $faker->realText(),
     ];
 
-      // this ligne of code it gonna be change the language faker from english to arabic
+      // this ligne of code it gonna be change the language faker from english to arabic:
+            $faker = \Faker\Factory::create('ar_SA');
 
-    $faker = \Faker\Factory::create('ar_SA');
+
+
 
     $data_ar =  [
         'name_ar' => $faker->name,       
@@ -28,3 +32,6 @@ $factory->define(Offer::class, function (Faker $faker) {
 
 
 });
+
+
+

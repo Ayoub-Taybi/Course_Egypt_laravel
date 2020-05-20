@@ -38,11 +38,11 @@ class Expiration extends Command
      */
     public function handle()
     {
-        $users = User::where('expire',0)->get();
+        $users = User::where('expire',true)->get();
 
         foreach($users as $user){
 
-            $user->update(['expire'=>1]);
+            $user->update(['expire'=>false]);
 
         }
     }

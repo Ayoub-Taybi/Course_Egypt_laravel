@@ -11,12 +11,22 @@ class SocialeAccount extends Model
         'provider_id', 'provider_name'
     ];
 
+ 
+
+    ################################### BEGIN Relations ########################################
+
+
+    //// ================== Relation user with SocialeAccount One TO Many ================== ////
+
 
     public function user(){
 
         return $this->belongsTo(User::class);
 
     }
+
+
+    ################################### END Relations ########################################
 
 
 }

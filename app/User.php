@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\SocialeAccount;
+use App\Models\Phone;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -39,11 +41,33 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
+   ################################### BEGIN Relations ########################################
+
+
+
+         //// ================== Relation user with SocialeAccount One TO Many ================== ////
+
+     
     public function accounts(){
 
         return $this->hasMany(SocialeAccount::class);
 
     }
+
+
+         //// ================== Relation user with phone One To One ================== ////
+
+
+    public function phone(){
+
+        return $this->hasOne(Phone::class,'user_id','id');
+
+    }
+
+
+
+    ################################### END Relations ########################################
+
 
 
 }

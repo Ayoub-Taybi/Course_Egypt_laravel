@@ -3,8 +3,12 @@
 use Illuminate\Database\Seeder;
 use App\Models\Offer;
 
+
 class OfferSeeder extends Seeder
 {
+
+
+
     /**
      * Run the database seeds.
      *

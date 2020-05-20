@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
-use App\Events\VideoViewer;
+use App\Hopital;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class HopitalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +41,10 @@ class VideoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Video  $video
+     * @param  \App\Hopital  $hopital
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+    public function show(Hopital $hopital)
     {
         //
     }
@@ -53,10 +52,10 @@ class VideoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Video  $video
+     * @param  \App\Hopital  $hopital
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video $video)
+    public function edit(Hopital $hopital)
     {
         //
     }
@@ -65,10 +64,10 @@ class VideoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Video  $video
+     * @param  \App\Hopital  $hopital
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video $video)
+    public function update(Request $request, Hopital $hopital)
     {
         //
     }
@@ -76,29 +75,11 @@ class VideoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Video  $video
+     * @param  \App\Hopital  $hopital
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy(Hopital $hopital)
     {
         //
     }
-
-
-
-
-    public function getVideo()
-    {
-
-            $video = Video::first();
-
-            event(new VideoViewer($video)); //fire event
-            return view('video')->with('video', $video); 
-
-       
-
-    }
-
-
-
 }

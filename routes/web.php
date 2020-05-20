@@ -53,11 +53,16 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
                 Route::get('delete/{offer_id}', 'OfferController@delete') -> name('offers.delete');
 
 
+                Route::get('image/{id}', 'OfferController@openImageBrowser') -> name('open-image-browser');
+
+
             });
 
 
 
         });
+
+
 
 
 ###################### BEGIN of route youtube using event and listener  ###############################
@@ -94,7 +99,7 @@ Route::group(['prefix' => 'ajax-offers'],function(){
 
 
 
-###################### BEGIN Authentication && Gaurdes ###############################
+###################### BEGIN routes Authentication && Gaurdes ###############################
 
 Route::group(['namespace'=>'Auth','middleware'=>['CheckAge','auth']],function(){
 
@@ -125,8 +130,48 @@ Route::get('/notadults', function () {
 })->name('not.adults');
 
 
+###################### END routes Authentication && Gaurdes ###############################
 
-###################### END Authentication && Gaurdes ###############################
+
+
+
+###################################### BEGIN routes relations   ##########################################
+
+Route::group(['namespace'=>'Relations','prefix'=>'Relations'],function(){
+
+
+    ################################ BEGIN routes relations One To One  #####################################
+
+    Route::get('has-one', 'RelationsController@hasOneRelation');
+    Route::get('has-one-reverse', 'RelationsController@hasOneRelationReverse');
+    Route::get('get-user-has-phone', 'RelationsController@getUserHasPhone');
+    Route::get('get-user-has-phone-with-condition', 'RelationsController@getUserHastPhoneCondition');
+    Route::get('get-user-has-not-phone', 'RelationsController@getUserHasNotPhone');
+
+    ############################### END routes relations One To One  #####################################
+
+
+
+    ################################ BEGIN routes relations One To Many  #####################################
+
+    Route::get('hospital-has-many', 'RelationsController@getHospitalDoctors');
+    Route::get('hospitals/all', 'RelationsController@getAllHospitals');
+    Route::get('hospital/doctors/{id}', 'RelationsController@getAllDoctorsHospital')->name('hospital.doctors');
+    Route::get('get-hospitals-has-doctors', 'RelationsController@getHospitalsHasDoctors');
+    Route::get('get-hospitals-has-not-doctors', 'RelationsController@getHospitalsHasNotDoctors');
+    Route::get('get-hospitals-has-doctors-male', 'RelationsController@getHospitalsHasDoctorsMale');
+    Route::get('get-hospitals-has-doctors-not-male', 'RelationsController@getHospitalsHasDoctorsNotMale');
+
+    // Route::get('get-user-has-not-phone', 'PhoneController@getUserHasNotPhone');
+
+    ############################# END routes relations One To Many  #####################################
+
+    
+});
+
+
+######################################### END routes relations   ##########################################
+
 
 
 

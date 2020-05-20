@@ -116,13 +116,15 @@ class OfferController extends Controller
 
         //validtion
 
-        //  $rules = $this->getRules($offer_id);
+        //   $rules = $this->getRules($id);
 
-        //  $messages = $this->getMessages();
+        //   $messages = $this->getMessages();
 
-        // // Methode 1
+        // // // Methode 1
 
         //  $request->validate($rules,$messages);
+
+        
 
         // chek if offer exists
 
@@ -166,8 +168,6 @@ class OfferController extends Controller
             ->route('offers.index')
             ->with(['success' => __('messages.offer deleted successfully')]);
 
-            
-
     }
 
 
@@ -197,8 +197,26 @@ class OfferController extends Controller
     // }
 
 
-  
 
+    public function openImageBrowser($id)
+    {
+
+        $offer = Offer::find($id);
+
+        if (!$offer)
+            return redirect()->back()->with(['error' => __('messages.offer not exist')]);
+
+        if (!$offer->photo)
+            return redirect()->back()->with(['error' => __('this offer has not image !!!')]);
+       
+        return response()->file($offer->photo);
+
+
+    }
+
+
+
+  
 
 
 
