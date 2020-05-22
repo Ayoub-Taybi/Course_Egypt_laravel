@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+
 @section('content')
     <div class="container">
 
@@ -7,9 +9,23 @@
             <div class="content">
                 <div class="title m-b-md">
                     المستشفيات
-
                 </div>
 
+                <br>
+
+
+                @if (Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                    </div>
+                @endif
+
+                @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{Session::get('success')}}
+                    </div>
+                @endif
+                
                 <br>
 
                 <table class="table">
@@ -24,7 +40,6 @@
                     <tbody>
 
 
-                    @if(isset($hospitals) && $hospitals -> count() > 0 )
                         @foreach($hospitals as $hospital)
                         <tr>
                             <th scope="row">{{$hospital -> id}}</th>
@@ -32,11 +47,10 @@
                             <td>{!!  $hospital -> address !!}</td>
                             <td>
                                 <a href="{{route('hospital.doctors',$hospital -> id)}}" class="btn btn-success"> عرض الاطباء</a>
-                                {{-- <a href="{{route('hospital.delete',$hospital -> id)}}" class="btn btn-danger">حذف</a> --}}
+                                <a href="{{route('hospital.delete',$hospital -> id)}}" class="btn btn-danger">حذف</a>
                             </td>
                         </tr>
                         @endforeach
-                    @endif
 
                     </tbody>
                 </table>

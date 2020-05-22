@@ -35,6 +35,7 @@
 
                 <br><br>
                 <form method="POST" action="{{route('save.doctors.services')}}">
+                    @method('PUT')
                     @csrf
                     {{-- <input name="_token" value="{{csrf_token()}}"> --}}
 

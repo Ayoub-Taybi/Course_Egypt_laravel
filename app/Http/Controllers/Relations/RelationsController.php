@@ -10,6 +10,7 @@ use App\Models\Phone;
 use App\User;
 use App\Models\Hospital;
 use App\Models\Doctor;
+use App\Models\Service;
 
 
 
@@ -142,10 +143,99 @@ class RelationsController extends Controller
     }
 
 
+    public function deleteHospitalWithHisDoctors($id){
+
+           $hospital = Hospital::find($id);
+
+           if(!$hospital)
+                return redirect()->back()->with(['error'=>"Delete has not been successfully"]);
+   
+
+           $hospital->doctors()->delete();
+           $hospital->delete();
+
+         
+        //    $request->session()->flash('success', 'Delete has been successfully');
+
+          return redirect()->back()->with(['success'=>"Delete has been successfully"]);
+
+    }
 
 
 
 ################################ END Methods relations One To Many  #####################################
+
+
+
+################################ BEGIN Methods relations Many To Many  #####################################
+
+    public function getDoctorServices(){
+
+        
+        $doctor = Doctor::with('services')->find(1);
+
+        return $doctor -> services;
+        
+    }
+
+    public function getServiceDoctors(){
+
+        
+        $service = Service::with(['doctors'=>function($q){
+            $q->select('doctors.id','name');
+        }])->find(13);
+
+
+         return  $service;     
+
+
+    }
+
+
+
+    public function getDoctorServicesById($id){
+
+        $doctor = Doctor::with(['services'=>function($q){
+
+            $q->select('services.id','name');
+
+        }])->find($id);
+
+        $services =  $doctor->services;
+
+        $doctors = Doctor::select('id','name')->get();
+
+        $allServices = Service::select('id','name')->get();
+
+
+
+        return view('doctors.services',compact('services','doctors','allServices'));
+
+
+    }
+
+
+    public function saveServicesToDoctors(Request $request){
+
+        $doctor = Doctor::find($request->doctor_id);
+
+        if(!$doctor)
+            return abort('404');
+
+           // $doctor->services()->attach($request->servicesIds);  //save data in related model table Many to Many even if already in table
+
+            // $doctor->services()->sync($request->servicesIds);   // save data in related model table Many to Many but it doing like update 
+
+            $doctor->services()->syncWithoutDetaching($request->servicesIds); // save data in related model table Many to Many but it ignore duplicate value and add the values to table
+
+            return 'success';
+
+
+    }
+
+
+
+################################ END Methods relations Many To Many  #####################################
 
 
     

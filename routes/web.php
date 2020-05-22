@@ -156,16 +156,28 @@ Route::group(['namespace'=>'Relations','prefix'=>'Relations'],function(){
 
     Route::get('hospital-has-many', 'RelationsController@getHospitalDoctors');
     Route::get('hospitals/all', 'RelationsController@getAllHospitals');
-    Route::get('hospital/doctors/{id}', 'RelationsController@getAllDoctorsHospital')->name('hospital.doctors');
+    Route::get('hospital/{id}/doctors', 'RelationsController@getAllDoctorsHospital')->name('hospital.doctors');
     Route::get('get-hospitals-has-doctors', 'RelationsController@getHospitalsHasDoctors');
     Route::get('get-hospitals-has-not-doctors', 'RelationsController@getHospitalsHasNotDoctors');
     Route::get('get-hospitals-has-doctors-male', 'RelationsController@getHospitalsHasDoctorsMale');
     Route::get('get-hospitals-has-doctors-not-male', 'RelationsController@getHospitalsHasDoctorsNotMale');
-
-    // Route::get('get-user-has-not-phone', 'PhoneController@getUserHasNotPhone');
+    Route::get('hospital/delete/{id}', 'RelationsController@deleteHospitalWithHisDoctors')->name('hospital.delete');
 
     ############################# END routes relations One To Many  #####################################
 
+
+    ################################ BEGIN routes relations Meny To Many  #####################################
+
+
+    Route::get('doctor/services', 'RelationsController@getDoctorServices');
+    Route::get('services/doctor', 'RelationsController@getServiceDoctors');
+    Route::get('doctor/{doctor_id}/services', 'RelationsController@getDoctorServicesById')->name('doctors.services');
+    Route::put('saveServices-to-doctor', 'RelationsController@saveServicesToDoctors')->name('save.doctors.services');
+
+
+    ############################# END routes relations Many To Many  #####################################
+
+    
     
 });
 
