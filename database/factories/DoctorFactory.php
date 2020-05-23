@@ -15,4 +15,11 @@ $factory->define(Doctor::class, function (Faker $faker) {
         'title' => $faker->jobTitle,
         'sex' => $gender,
     ];
+
 });
+
+
+
+
+
+

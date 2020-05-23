@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         }
 
 
-         $this->call([UserSeeder::class,OfferSeeder::class,HospitalSeeder::class,DoctorSeeder::Class,ServiceSeeder::class]);
+         $this->call([UserSeeder::class,OfferSeeder::class,CountrySeeder::class,HospitalSeeder::class,PatientSeeder::class,DoctorSeeder::Class,ServiceSeeder::class]);
          
          
            // we can put the classes seeder in array and give it to this method for executed

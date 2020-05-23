@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Doctor;
+use App\Models\Country;
 
 
 class Hospital extends Model
@@ -22,6 +23,13 @@ class Hospital extends Model
 
         return $this->hasMany(Doctor::class,'hospital_id','id');
 
+
+    }
+
+
+    public function country(){
+
+        return $this->belongsTo(Country::class);
 
     }
 

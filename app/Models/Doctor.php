@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Hospital;
 use App\Models\Service;
+use App\Models\Medical;
+
 
 
 class Doctor extends Model
 {
     
-    protected  $fillable = ['name','title','sex'];
+    protected  $fillable = ['name','title','sex','medical_id','hospital_id'];
 
-    protected  $hidden = ['hospital_id','created_at','updated_at'] ;
+    protected  $hidden = ['medical_id','hospital_id','created_at','updated_at'] ;
 
 
     ################################### BEGIN Relations ########################################
@@ -39,11 +41,17 @@ class Doctor extends Model
 
         // ->as('newName'); renam model itermediate table by default pivot
 
-
-
-
-
     }
+
+
+       //// ================== Relation Medical with Doctor One To One ================== ////
+
+
+         public function medical(){
+
+             return $this->belongsTo(Medical::class);
+
+          }
 
 
 

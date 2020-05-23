@@ -166,7 +166,7 @@ Route::group(['namespace'=>'Relations','prefix'=>'Relations'],function(){
     ############################# END routes relations One To Many  #####################################
 
 
-    ################################ BEGIN routes relations Meny To Many  #####################################
+    ################################ BEGIN routes relations Many To Many  #####################################
 
 
     Route::get('doctor/services', 'RelationsController@getDoctorServices');
@@ -176,6 +176,13 @@ Route::group(['namespace'=>'Relations','prefix'=>'Relations'],function(){
 
 
     ############################# END routes relations Many To Many  #####################################
+
+
+    ################################ BEGIN routes relations Has One Through  #####################################
+
+    Route::get('has-one-through', 'RelationsController@getPatientDoctor');
+
+    ################################ END routes relations Has One Through  #####################################
 
     
     

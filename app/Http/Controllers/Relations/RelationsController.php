@@ -11,6 +11,7 @@ use App\User;
 use App\Models\Hospital;
 use App\Models\Doctor;
 use App\Models\Service;
+use App\Models\Patient;
 
 
 
@@ -236,6 +237,21 @@ class RelationsController extends Controller
 
 
 ################################ END Methods relations Many To Many  #####################################
+
+
+################################ Begin Methods relations Has One Through  #####################################
+
+
+       public function getPatientDoctor(){
+
+            $patient = Patient::find(5);
+         
+            return  $patient->doctor;
+
+       }
+
+
+################################ END Methods relations Has One Through  #####################################
 
 
     
